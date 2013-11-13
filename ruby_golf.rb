@@ -1301,6 +1301,22 @@ eval ["
   #           level are prepended by two additional spaces per level away from
   #           the top level
   def self.pretty_hash(h)
+    p h, "", 0
+  end
+
+  def self.p h, r, i
+    h.each {|k, v|
+      r += '  ' * i
+      r += k.to_s + ":\n"
+      if v.is_a? Hash
+        r = p v, r, (i + 1)
+      elsif v.is_a? Array
+        r += v.map{|n| ('  ' * i) + '- ' + n}.join("\n") + "\n"
+      else
+        r += '  ' * i + '- ' + v.to_s + "\n"
+      end
+    }
+    r
   end
 
 
