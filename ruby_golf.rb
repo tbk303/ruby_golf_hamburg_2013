@@ -256,7 +256,7 @@ eval ["
   def self.s h
     return h if !h.is_a? Hash
     r = {}
-    h.each_pair {|k,v| r[k.to_sym] = s v}
+    h.each {|k,v| r[:"#{k}"] = s v}
     r
   end
 
@@ -268,6 +268,13 @@ eval ["
   # output: the maximum value found by calculating the sums of all rows and
   #         columns
   def self.grid_computing(g)
+    m = g.lines.map &:split
+    [
+      m.map{|l| l.map(&:to_i).inject(:+)}.max,
+      (0..m[0].size).map { |c|
+        m.map{|l| l[c].to_i}.inject(:+)
+      }.max
+    ].max
   end
 
 
