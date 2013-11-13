@@ -8,7 +8,7 @@ module RubyGolf
   #         v - number of visible trailing numbers
   # output: x'ed out string
   def self.x_out_numbers(n, v)
-    i = [0, n.length - v].max
+    i = [0, n.size - v].max
     'x' * i + n[i, v]
   end
 
@@ -20,7 +20,8 @@ module RubyGolf
   # ouput:  a 'ruby style' version of the identifier: all lowercase, former case
   #         changes to upper case get a prepended underscore
   def self.underscore(s)
-    s.gsub!(/(.)([A-Z\-])/,'\1_\2')
+    s.gsub! /(.)([A-Z])/,'\1_\2'
+    s.gsub! /-/,'' 
     s.downcase
   end
 
@@ -34,8 +35,16 @@ module RubyGolf
   #         Values that are hashes contain only smybols as keys too, this
   #         condition is maintained recursivley
   def self.symbolize_keys(h)
+    s h
   end
 
+
+  def self.s h
+    return h if !h.is_a? Hash
+    r = {}
+    h.each_pair {|k,v| r[k.to_sym] = s v}
+    r
+  end
 
   ##############################################################################
   # Hole 4: RubyGolf.grid_computing                                            #
