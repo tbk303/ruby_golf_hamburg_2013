@@ -332,6 +332,16 @@ eval ["
   # output: an ascii art string ready for output where there aren't any trailing
   #         spaces after the last character in each line
   def self.bob_ross(s)
+    r = []
+    s.lines.each{|l|
+      l = l.split
+      y = l[1].to_i
+      a = r[y] || []
+      a[l[0].to_i] = l[2].to_i.chr
+      r[y] = a
+    }
+
+    r.map{|l| l.reverse.drop_while{|c| c.nil?}.reverse.map{|c| c.nil? ? ' ' : c}.join}.join("\n") + "\n"
   end
 
 end
