@@ -55,7 +55,6 @@ module RubyGolf
   #         columns
   def self.grid_computing(g)
     m = g.lines.map &:split
-    puts m.inspect
     [
       m.map{|l| l.map(&:to_i).inject(:+)}.max,
       (0..m[0].size).map { |c|
