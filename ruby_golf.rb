@@ -8,6 +8,8 @@ module RubyGolf
   #         v - number of visible trailing numbers
   # output: x'ed out string
   def self.x_out_numbers(n, v)
+    i = [0, n.length - v].max
+    'x' * i + n[i, v]
   end
 
 
@@ -18,6 +20,8 @@ module RubyGolf
   # ouput:  a 'ruby style' version of the identifier: all lowercase, former case
   #         changes to upper case get a prepended underscore
   def self.underscore(s)
+    s.gsub!(/(.)([A-Z\-])/,'\1_\2')
+    s.downcase
   end
 
 
