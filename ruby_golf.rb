@@ -1163,8 +1163,12 @@ end
   #           word 1* ...)
   #         * sum all products
   def self.word_letter_sum(s)
+    w=s.split.map{|e|v=e.upcase.unpack("C*")
+    v.inject(0){|j,k|j+k}-64*v.size}.sort.reverse
+    r=0
+    w.each_with_index{|e,i|r+=(i+1)*e}
+    r
   end
-
 
   ##############################################################################
   # Hole 8: RubyGolf.bob_ross                                                  #
